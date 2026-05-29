@@ -1,0 +1,881 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "" : {
+
+    },
+    "Appearance" : {
+      "comment" : "Section header for the appearance / color scheme setting",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appearance"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aspetto"
+          }
+        }
+      }
+    },
+    "Author" : {
+      "comment" : "Label for the author metadata field in Settings",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Author"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autore"
+          }
+        }
+      }
+    },
+    "Balanced (1000px)" : {
+      "comment" : "Resolution preset label",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Balanced (1000px)"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bilanciato (1000px)"
+          }
+        }
+      }
+    },
+    "Building %@…" : {
+      "comment" : "Progress message while packaging output file; %@ is the output filename",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Building %1$@…"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Costruzione %1$@…"
+          }
+        }
+      }
+    },
+    "Cannot create archive file." : {
+      "comment" : "Error shown when a CBZ or EPUB archive cannot be created",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cannot create archive file."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile creare il file archivio."
+          }
+        }
+      }
+    },
+    "Cannot open PDF file." : {
+      "comment" : "Error shown when the source PDF cannot be opened",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cannot open PDF file."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile aprire il file PDF."
+          }
+        }
+      }
+    },
+    "Choose Output Folder…" : {
+      "comment" : "Action bar button label when no output folder has been selected yet",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose Output Folder…"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scegli cartella di destinazione…"
+          }
+        }
+      }
+    },
+    "Choose…" : {
+      "comment" : "Button to open the output folder picker",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose…"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scegli…"
+          }
+        }
+      }
+    },
+    "Clear Done" : {
+      "comment" : "Button that removes completed jobs from the list",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear Done"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rimuovi Completati"
+          }
+        }
+      }
+    },
+    "Color Scheme" : {
+      "comment" : "Picker label for light/dark/system appearance override",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Color Scheme"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schema colori"
+          }
+        }
+      }
+    },
+    "Convert" : {
+      "comment" : "Primary action button label when idle",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Convert"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Converti"
+          }
+        }
+      }
+    },
+    "Converting…" : {
+      "comment" : "Primary action button label while a conversion is running",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Converting…"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conversione…"
+          }
+        }
+      }
+    },
+    "Custom" : {
+      "comment" : "Resolution preset label for user-defined width",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Custom"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Personalizzato"
+          }
+        }
+      }
+    },
+    "Dark" : {
+      "comment" : "Appearance mode — always use dark interface",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dark"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scuro"
+          }
+        }
+      }
+    },
+    "Direction" : {
+      "comment" : "Label for the reading-direction picker in Settings",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Direction"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Direzione"
+          }
+        }
+      }
+    },
+    "Done (%lld parts) ✓" : {
+      "comment" : "Job status when conversion produced multiple output files; %lld is the part count",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done (%1$lld parts) ✓"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Completato (%1$lld parti) ✓"
+          }
+        }
+      }
+    },
+    "Done ✓" : {
+      "comment" : "Job status when conversion completed successfully (single output file)",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done ✓"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Completato ✓"
+          }
+        }
+      }
+    },
+    "Drop PDF files here to get started." : {
+      "comment" : "Empty state body text shown when no PDFs have been added",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drop PDF files here to get started."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trascina qui i file PDF per iniziare."
+          }
+        }
+      }
+    },
+    "Drop PDFs here or click to browse" : {
+      "comment" : "Drop zone hint label",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drop PDFs here or click to browse"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trascina i PDF qui o clicca per sfogliare"
+          }
+        }
+      }
+    },
+    "Failed to render a page." : {
+      "comment" : "Error shown when a PDF page cannot be rasterised",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to render a page."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile renderizzare una pagina."
+          }
+        }
+      }
+    },
+    "Failed: %@" : {
+      "comment" : "Job status when conversion failed; %@ is the localized error description",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed: %1$@"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fallito: %1$@"
+          }
+        }
+      }
+    },
+    "Format" : {
+      "comment" : "Label for the output-format picker in Settings",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Format"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Formato"
+          }
+        }
+      }
+    },
+    "High (1300px)" : {
+      "comment" : "Resolution preset label",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "High (1300px)"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alta qualità (1300px)"
+          }
+        }
+      }
+    },
+    "Left to Right (Comics)" : {
+      "comment" : "Reading direction option label",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Left to Right (Comics)"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Da sinistra a destra (Fumetti)"
+          }
+        }
+      }
+    },
+    "Light" : {
+      "comment" : "Appearance mode — always use light interface",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Light"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chiaro"
+          }
+        }
+      }
+    },
+    "Light (800px)" : {
+      "comment" : "Resolution preset label",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Light (800px)"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leggero (800px)"
+          }
+        }
+      }
+    },
+    "Limit file size" : {
+      "comment" : "Toggle label in Settings that enables splitting output by file size",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Limit file size"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Limita dimensione file"
+          }
+        }
+      }
+    },
+    "Limit output size" : {
+
+    },
+    "Max size (MB)" : {
+      "comment" : "Label for the max file size field in Settings",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Max size (MB)"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dimensione massima (MB)"
+          }
+        }
+      }
+    },
+    "MB" : {
+      "comment" : "Placeholder/unit label for the max file size text field",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MB"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MB"
+          }
+        }
+      }
+    },
+    "Metadata" : {
+      "comment" : "Settings section header for EPUB metadata fields",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Metadata"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Metadati"
+          }
+        }
+      }
+    },
+    "No files added yet" : {
+      "comment" : "Empty state message shown when the job list is empty",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No files added yet"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nessun file aggiunto"
+          }
+        }
+      }
+    },
+    "No PDFs" : {
+      "comment" : "Empty state title shown when the job list is empty",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No PDFs"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nessun PDF"
+          }
+        }
+      }
+    },
+    "Not selected" : {
+      "comment" : "Placeholder shown when no output folder has been chosen",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not selected"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non selezionata"
+          }
+        }
+      }
+    },
+    "Output" : {
+      "comment" : "Settings section header for output format",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Output"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Output"
+          }
+        }
+      }
+    },
+    "Output Folder" : {
+      "comment" : "Section headline above the output folder path",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Output Folder"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cartella di Output"
+          }
+        }
+      }
+    },
+    "PDF contains no pages." : {
+      "comment" : "Error shown when the PDF has a page count of zero",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PDF contains no pages."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il PDF non contiene pagine."
+          }
+        }
+      }
+    },
+    "PDF Files" : {
+      "comment" : "Section header above the file job list",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PDF Files"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "File PDF"
+          }
+        }
+      }
+    },
+    "px" : {
+      "comment" : "Placeholder text for the custom width text field",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "px"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "px"
+          }
+        }
+      }
+    },
+    "Quality" : {
+      "comment" : "Settings section header for image quality / resolution",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quality"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Qualità"
+          }
+        }
+      }
+    },
+    "Recompressing images to meet size limit…" : {
+
+    },
+    "Rendering page %lld / %lld…" : {
+      "comment" : "Progress message during page rendering; first %lld is the current page, second is the total",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rendering page %1$lld / %2$lld…"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Renderizzazione pagina %1$lld / %2$lld…"
+          }
+        }
+      }
+    },
+    "Rendering pages…" : {
+      "comment" : "Initial progress message before per-page progress begins",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rendering pages…"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Renderizzazione pagine…"
+          }
+        }
+      }
+    },
+    "Resolution" : {
+      "comment" : "Label for the resolution picker in Settings",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resolution"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Risoluzione"
+          }
+        }
+      }
+    },
+    "Right to Left (Manga)" : {
+      "comment" : "Reading direction option label",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Right to Left (Manga)"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Da destra a sinistra (Manga)"
+          }
+        }
+      }
+    },
+    "Select Output Folder" : {
+      "comment" : "NSOpenPanel prompt for choosing the output folder",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select Output Folder"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seleziona Cartella di Output"
+          }
+        }
+      }
+    },
+    "Settings" : {
+
+    },
+    "Size Limit" : {
+
+    },
+    "Split" : {
+      "comment" : "Settings section header for file-splitting options",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Split"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suddivisione"
+          }
+        }
+      }
+    },
+    "Starting…" : {
+      "comment" : "Initial progress message when a job begins processing",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Starting…"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avvio…"
+          }
+        }
+      }
+    },
+    "System" : {
+      "comment" : "Appearance mode — follow the system setting",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "System"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sistema"
+          }
+        }
+      }
+    },
+    "Unknown" : {
+      "comment" : "Default/placeholder value for the EPUB author field",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unknown"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sconosciuto"
+          }
+        }
+      }
+    },
+    "Waiting…" : {
+      "comment" : "Job status when queued but not yet started",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Waiting…"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In attesa…"
+          }
+        }
+      }
+    },
+    "Width (px)" : {
+      "comment" : "Label for the custom width text field in Settings",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Width (px)"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Larghezza (px)"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
