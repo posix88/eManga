@@ -79,7 +79,7 @@ struct PDFConverter {
                     }
 
                     // Divide pages into chunks — one chunk per CPU core; each chunk gets its own CGPDFDocument
-                    // CGPDFDocument/CGPDFPage are CoreGraphics types with no @MainActor restriction, fully concurrent-safe
+                    // CGPDFDocument/CGPDFPage are CoreGraphics types fully concurrent-safe
                     let concurrency = min(ProcessInfo.processInfo.activeProcessorCount, pageCount)
                     let chunkSize   = max(1, (pageCount + concurrency - 1) / concurrency)
 
@@ -105,7 +105,9 @@ struct PDFConverter {
                                         continue
                                     }
                                     let pageStart = renderClock.now
-                                    try PDFConverter.renderPage(page, width: renderWidth, quality: renderQuality, to: imageURLs[i])
+                                    try autoreleasepool {
+                                        try PDFConverter.renderPage(page, width: renderWidth, quality: renderQuality, to: imageURLs[i])
+                                    }
                                     Logger.converter.debug(
                                         "Rendered page \(i + 1, privacy: .public)/\(pageCount, privacy: .public) in \((renderClock.now - pageStart).formatted(.units(allowed: [.milliseconds])), privacy: .public)"
                                     )
@@ -144,7 +146,7 @@ struct PDFConverter {
                                 "Size limit: \(actualBytes / 1_024 / 1_024, privacy: .public) MB > \(maxFileSizeMB, privacy: .public) MB target; recompressing at quality \(String(format: "%.2f", adjustedQuality), privacy: .public)"
                             )
                             continuation.yield(.progress(fraction: 0.66, message: String(localized: "Recompressing images to meet size limit…")))
-                            try PDFConverter.recompress(renderedImages, quality: adjustedQuality)
+                            try await PDFConverter.recompress(renderedImages, quality: adjustedQuality)
                             let newBytes = renderedImages.reduce(0) { $0 + fileBytes($1) }
                             Logger.converter.notice(
                                 "After recompression: \(newBytes / 1_024 / 1_024, privacy: .public) MB"
@@ -248,16 +250,19 @@ struct PDFConverter {
 
     /// Recompresses all JPEG images in-place at the given quality level.
     /// Used to meet a target file size after the initial render.
-    private nonisolated static func recompress(_ urls: [URL], quality: Double) throws {
+    private nonisolated static func recompress(_ urls: [URL], quality: Double) async throws {
         for url in urls {
-            let cfURL = url as CFURL
-            guard
-                let source = CGImageSourceCreateWithURL(cfURL, nil),
-                let image  = CGImageSourceCreateImageAtIndex(source, 0, nil),
-                let dest   = CGImageDestinationCreateWithURL(cfURL, UTType.jpeg.identifier as CFString, 1, nil)
-            else { throw ConversionError.renderFailed }
-            CGImageDestinationAddImage(dest, image, [kCGImageDestinationLossyCompressionQuality: quality] as CFDictionary)
-            guard CGImageDestinationFinalize(dest) else { throw ConversionError.renderFailed }
+            try autoreleasepool {
+                let cfURL = url as CFURL
+                guard
+                    let source = CGImageSourceCreateWithURL(cfURL, nil),
+                    let image  = CGImageSourceCreateImageAtIndex(source, 0, nil),
+                    let dest   = CGImageDestinationCreateWithURL(cfURL, UTType.jpeg.identifier as CFString, 1, nil)
+                else { throw ConversionError.renderFailed }
+                CGImageDestinationAddImage(dest, image, [kCGImageDestinationLossyCompressionQuality: quality] as CFDictionary)
+                guard CGImageDestinationFinalize(dest) else { throw ConversionError.renderFailed }
+            }
+            await Task.yield()
         }
     }
 
