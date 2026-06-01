@@ -1,4 +1,5 @@
 import Foundation
+import Observation
 
 enum JobStatus {
     case pending
@@ -7,10 +8,15 @@ enum JobStatus {
     case failed(Error)
 }
 
-struct ConversionJob: Identifiable {
+@Observable
+final class ConversionJob: Identifiable {
     let id = UUID()
     let pdfURL: URL
     var status: JobStatus = .pending
+    
+    init(pdfURL: URL) {
+        self.pdfURL = pdfURL
+    }
 
     var filename: String { pdfURL.lastPathComponent }
     var title: String    { pdfURL.deletingPathExtension().lastPathComponent }

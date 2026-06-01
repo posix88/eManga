@@ -3,7 +3,7 @@ import ZIPFoundation
 import OSLog
 
 struct CBZBuilder {
-    static func build(images: [URL], to destination: URL) throws {
+    nonisolated static func build(images: [URL], to destination: URL) async throws {
         Logger.cbzBuilder.info(
             "Building CBZ — \(images.count, privacy: .public) image(s) → \(destination.lastPathComponent, privacy: .private(mask: .hash))"
         )
@@ -21,6 +21,7 @@ struct CBZBuilder {
             let entryName = String(format: "page-%04d.jpg", idx + 1)
             // Store JPEGs without re-compression — they are already compressed and deflate yields no benefit
             try archive.addEntry(with: entryName, fileURL: imageURL, compressionMethod: .none)
+            await Task.yield()
         }
 
         let elapsed = clock.now - start

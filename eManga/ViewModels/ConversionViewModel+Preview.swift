@@ -15,17 +15,17 @@ extension ConversionViewModel {
             pdfURL: URL(fileURLWithPath: "/Users/demo/Documents/One Piece Vol 1.pdf")
         )
 
-        var processing = ConversionJob(
+        let processing = ConversionJob(
             pdfURL: URL(fileURLWithPath: "/Users/demo/Documents/Naruto Vol 3.pdf")
         )
         processing.status = .processing(progress: 0.6, message: "Converting page 45 of 75…")
 
-        var done = ConversionJob(
+        let done = ConversionJob(
             pdfURL: URL(fileURLWithPath: "/Users/demo/Documents/Bleach Vol 7.pdf")
         )
         done.status = .done
 
-        var failed = ConversionJob(
+        let failed = ConversionJob(
             pdfURL: URL(fileURLWithPath: "/Users/demo/Documents/Berserk Vol 12.pdf")
         )
         failed.status = .failed(

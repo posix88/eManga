@@ -35,11 +35,22 @@ struct PDFConverter {
         outputDir: URL,
         settings: ConversionSettings
     ) -> AsyncThrowingStream<ConversionEvent, Error> {
-        AsyncThrowingStream { continuation in
-            Task {
+        // Capture ALL settings values upfront — ConversionSettings is @Observable but not Sendable
+        let renderWidth   = settings.effectiveWidth
+        let renderQuality = settings.effectiveQuality
+        let maxFileSizeMB = settings.maxFileSizeMB
+        let outputFormat  = settings.outputFormat
+        let author        = settings.author
+        let direction     = settings.direction
+        
+        let formatRaw = settings.outputFormat.rawValue
+        let resolutionRaw = settings.resolution.rawValue
+        
+        return AsyncThrowingStream { continuation in
+            Task.detached(priority: .userInitiated) {
                 do {
                     Logger.converter.info(
-                        "convert() — file: \(url.lastPathComponent, privacy: .private(mask: .hash)), format: \(settings.outputFormat.rawValue, privacy: .public), resolution: \(settings.resolution.rawValue, privacy: .public), width: \(settings.effectiveWidth, privacy: .public)px, quality: \(settings.effectiveQuality, privacy: .public), maxSizeMB: \(settings.maxFileSizeMB, privacy: .public)"
+                        "convert() — file: \(url.lastPathComponent, privacy: .private(mask: .hash)), format: \(formatRaw, privacy: .public), resolution: \(resolutionRaw, privacy: .public), width: \(renderWidth, privacy: .public)px, quality: \(renderQuality, privacy: .public), maxSizeMB: \(maxFileSizeMB, privacy: .public)"
                     )
 
                     guard let cgDoc = CGPDFDocument(url as CFURL) else {
@@ -66,14 +77,6 @@ struct PDFConverter {
                     let imageURLs: [URL] = (0 ..< pageCount).map { i in
                         tempDir.appendingPathComponent(String(format: "page-%04d.jpg", i + 1))
                     }
-
-                    // Capture ALL settings values upfront — ConversionSettings is @Observable but not Sendable
-                    let renderWidth   = settings.effectiveWidth
-                    let renderQuality = settings.effectiveQuality
-                    let maxFileSizeMB = settings.maxFileSizeMB
-                    let outputFormat  = settings.outputFormat
-                    let author        = settings.author
-                    let direction     = settings.direction
 
                     // Divide pages into chunks — one chunk per CPU core; each chunk gets its own CGPDFDocument
                     // CGPDFDocument/CGPDFPage are CoreGraphics types with no @MainActor restriction, fully concurrent-safe
@@ -107,10 +110,12 @@ struct PDFConverter {
                                         "Rendered page \(i + 1, privacy: .public)/\(pageCount, privacy: .public) in \((renderClock.now - pageStart).formatted(.units(allowed: [.milliseconds])), privacy: .public)"
                                     )
                                     let done = await counter.increment()
-                                    continuation.yield(.progress(
-                                        fraction: Double(done) / Double(pageCount) * 0.65,
-                                        message:  String(localized: "Rendering page \(done) / \(pageCount)…")
-                                    ))
+                                    if done % 5 == 0 || done == pageCount {
+                                        continuation.yield(.progress(
+                                            fraction: Double(done) / Double(pageCount) * 0.65,
+                                            message:  String(localized: "Rendering page \(done) / \(pageCount)…")
+                                        ))
+                                    }
                                     await Task.yield()
                                 }
                             }
@@ -159,7 +164,7 @@ struct PDFConverter {
 
                     if outputFormat == .cbz || outputFormat == .all {
                         let out = outputDir.appendingPathComponent("\(cleanTitle).cbz")
-                        try CBZBuilder.build(images: renderedImages, to: out)
+                        try await CBZBuilder.build(images: renderedImages, to: out)
                         Logger.converter.notice(
                             "CBZ written: \(out.lastPathComponent, privacy: .private(mask: .hash)) (\(fileSizeKB(out), privacy: .public) KB)"
                         )
@@ -167,7 +172,7 @@ struct PDFConverter {
 
                     if outputFormat == .epub || outputFormat == .all {
                         let out = outputDir.appendingPathComponent("\(cleanTitle).epub")
-                        try EPUBBuilder.build(
+                        try await EPUBBuilder.build(
                             images:    renderedImages,
                             title:     url.deletingPathExtension().lastPathComponent,
                             author:    author,
@@ -192,7 +197,7 @@ struct PDFConverter {
     // MARK: - Page rendering
 
     /// Renders a single PDF page to a JPEG file.
-    /// Uses only CoreGraphics — no PDFKit, no `@MainActor` restriction — safe to call concurrently.
+    /// Uses only CoreGraphics safe to call concurrently.
     private nonisolated static func renderPage(_ page: CGPDFPage, width: Int, quality: Double, to destURL: URL) throws {
         let mediaBox    = page.getBoxRect(.mediaBox)
         let scale       = CGFloat(width) / mediaBox.width
@@ -243,7 +248,7 @@ struct PDFConverter {
 
     /// Recompresses all JPEG images in-place at the given quality level.
     /// Used to meet a target file size after the initial render.
-    private static func recompress(_ urls: [URL], quality: Double) throws {
+    private nonisolated static func recompress(_ urls: [URL], quality: Double) throws {
         for url in urls {
             let cfURL = url as CFURL
             guard
@@ -257,14 +262,14 @@ struct PDFConverter {
     }
 
     /// Returns file size in bytes using FileManager (reliable in sandboxed temp directories).
-    private static func fileBytes(_ url: URL) -> Int {
+    private nonisolated static func fileBytes(_ url: URL) -> Int {
         (try? FileManager.default.attributesOfItem(atPath: url.path(percentEncoded: false))[.size] as? Int) ?? 0
     }
 
     /// Returns file size in KB for logging.
-    private static func fileSizeKB(_ url: URL) -> Int { fileBytes(url) / 1_024 }
+    private nonisolated static func fileSizeKB(_ url: URL) -> Int { fileBytes(url) / 1_024 }
 
-    private static func sanitize(_ name: String) -> String {
+    private nonisolated static func sanitize(_ name: String) -> String {
         name.replacing(" ", with: "_")
             .replacing(/[\/\\?%*:|"<>]/, with: "_")
     }

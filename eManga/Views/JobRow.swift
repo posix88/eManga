@@ -8,6 +8,7 @@ struct JobRow: View {
         VStack(alignment: .leading, spacing: 4) {
             HStack(spacing: 8) {
                 statusIcon
+                
                 Text(job.filename)
                     .lineLimit(1)
                     .truncationMode(.middle)
@@ -20,17 +21,14 @@ struct JobRow: View {
                 .buttonStyle(.plain)
             }
 
-            if case .processing(let p, let msg) = job.status {
+            if case .processing(let p, _) = job.status {
                 ProgressView(value: p)
                     .progressViewStyle(.linear)
-                Text(msg)
-                    .font(.caption2)
-                    .foregroundStyle(.secondary)
-            } else {
-                Text(job.statusMessage)
-                    .font(.caption2)
-                    .foregroundStyle(statusColor)
             }
+            
+            Text(job.statusMessage)
+                .font(.caption2)
+                .foregroundStyle(statusColor)
         }
         .padding(.vertical, 2)
     }
@@ -39,14 +37,21 @@ struct JobRow: View {
     private var statusIcon: some View {
         switch job.status {
         case .pending:
-            Image(systemName: "clock").foregroundStyle(.secondary)
+            Image(systemName: "clock")
+                .foregroundStyle(.secondary)
+            
         case .processing:
-            Image(systemName: "gear").foregroundStyle(.blue)
+            Image(systemName: "gear")
+                .foregroundStyle(.blue)
                 .symbolEffect(.rotate, isActive: true)
+            
         case .done:
-            Image(systemName: "checkmark.circle.fill").foregroundStyle(.green)
+            Image(systemName: "checkmark.circle.fill")
+                .foregroundStyle(.green)
+            
         case .failed:
-            Image(systemName: "xmark.circle.fill").foregroundStyle(.red)
+            Image(systemName: "xmark.circle.fill")
+                .foregroundStyle(.red)
         }
     }
 
@@ -70,7 +75,7 @@ struct JobRow: View {
 }
 
 #Preview("Processing") {
-    var job = ConversionJob(pdfURL: URL(fileURLWithPath: "/demo/Naruto Vol 3.pdf"))
+    let job = ConversionJob(pdfURL: URL(fileURLWithPath: "/demo/Naruto Vol 3.pdf"))
     job.status = .processing(progress: 0.6, message: "Converting page 45 of 75…")
     return List {
         JobRow(job: job, onRemove: {})
@@ -78,7 +83,7 @@ struct JobRow: View {
 }
 
 #Preview("Done") {
-    var job = ConversionJob(pdfURL: URL(fileURLWithPath: "/demo/Bleach Vol 7.pdf"))
+    let job = ConversionJob(pdfURL: URL(fileURLWithPath: "/demo/Bleach Vol 7.pdf"))
     job.status = .done
     return List {
         JobRow(job: job, onRemove: {})
@@ -86,7 +91,7 @@ struct JobRow: View {
 }
 
 #Preview("Failed") {
-    var job = ConversionJob(pdfURL: URL(fileURLWithPath: "/demo/Berserk Vol 12.pdf"))
+    let job = ConversionJob(pdfURL: URL(fileURLWithPath: "/demo/Berserk Vol 12.pdf"))
     job.status = .failed(
         NSError(domain: "Preview", code: 0,
                 userInfo: [NSLocalizedDescriptionKey: "File could not be opened"])

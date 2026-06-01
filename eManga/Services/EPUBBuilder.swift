@@ -6,13 +6,13 @@ import OSLog
 
 struct EPUBBuilder {
 
-    static func build(
+    nonisolated static func build(
         images:    [URL],
         title:     String,
         author:    String,
         direction: ReadingDirection,
         to destination: URL
-    ) throws {
+    ) async throws {
         Logger.epubBuilder.info(
             "Building EPUB — \(images.count, privacy: .public) image(s), direction: \(direction.rawValue, privacy: .public) → \(destination.lastPathComponent, privacy: .private(mask: .hash))"
         )
@@ -61,6 +61,8 @@ struct EPUBBuilder {
             try pageXHTML(pageNum: pageNum, imgName: imgName, width: w, height: h)
                 .write(to: xhtmlDir.appendingPathComponent("page_\(pageNum).xhtml"),
                        atomically: true, encoding: .utf8)
+            
+            await Task.yield()
         }
 
         // nav.xhtml & content.opf
@@ -78,7 +80,7 @@ struct EPUBBuilder {
         try archive.addEntry(with: "mimetype",
                              fileURL: tempDir.appendingPathComponent("mimetype"),
                              compressionMethod: .none)
-        try addDirectoryContents(of: tempDir, into: archive, relativeTo: tempDir, excluding: "mimetype")
+        try await addDirectoryContents(of: tempDir, into: archive, relativeTo: tempDir, excluding: "mimetype")
 
         let elapsed = clock.now - start
         let sizeKB  = (try? destination.resourceValues(forKeys: [.fileSizeKey]).fileSize).map { $0 / 1024 } ?? 0
@@ -91,22 +93,24 @@ struct EPUBBuilder {
 
     private static func addDirectoryContents(
         of dir: URL, into archive: Archive, relativeTo base: URL, excluding: String?
-    ) throws {
+    ) async throws {
         let items = try FileManager.default.contentsOfDirectory(
             at: dir, includingPropertiesForKeys: [.isDirectoryKey])
         for item in items {
             if let ex = excluding, item.lastPathComponent == ex { continue }
             let isDir = (try? item.resourceValues(forKeys: [.isDirectoryKey]).isDirectory) ?? false
             if isDir {
-                try addDirectoryContents(of: item, into: archive, relativeTo: base, excluding: nil)
+                try await addDirectoryContents(of: item, into: archive, relativeTo: base, excluding: nil)
             } else {
                 let rel = String(item.path.dropFirst(base.path.count + 1))
                 try archive.addEntry(with: rel, fileURL: item)
             }
+            
+            await Task.yield()
         }
     }
 
-    private static func imageDimensions(at url: URL) -> (Int, Int) {
+    private nonisolated static func imageDimensions(at url: URL) -> (Int, Int) {
         guard
             let src   = CGImageSourceCreateWithURL(url as CFURL, nil),
             let props = CGImageSourceCopyPropertiesAtIndex(src, 0, nil) as? [CFString: Any],
@@ -116,7 +120,7 @@ struct EPUBBuilder {
         return (w, h)
     }
 
-    private static func xmlEscape(_ s: String) -> String {
+    private nonisolated static func xmlEscape(_ s: String) -> String {
         s.replacing("&",  with: "&amp;")
          .replacing("<",  with: "&lt;")
          .replacing(">",  with: "&gt;")
@@ -125,7 +129,7 @@ struct EPUBBuilder {
 
     // MARK: - Templates
 
-    private static var containerXML: String {
+    private nonisolated static var containerXML: String {
         """
         <?xml version="1.0" encoding="UTF-8"?>
         <container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">
@@ -136,7 +140,7 @@ struct EPUBBuilder {
         """
     }
 
-    private static var navXHTML: String {
+    private nonisolated static var navXHTML: String {
         """
         <?xml version="1.0" encoding="UTF-8"?>
         <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
@@ -150,7 +154,7 @@ struct EPUBBuilder {
         """
     }
 
-    private static func pageXHTML(pageNum: Int, imgName: String, width: Int, height: Int) -> String {
+    private nonisolated static func pageXHTML(pageNum: Int, imgName: String, width: Int, height: Int) -> String {
         """
         <?xml version="1.0" encoding="UTF-8"?>
         <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
@@ -165,7 +169,7 @@ struct EPUBBuilder {
         """
     }
 
-    private static func contentOPF(
+    private nonisolated static func contentOPF(
         title: String, author: String,
         direction: String, manifest: String, spine: String
     ) -> String {

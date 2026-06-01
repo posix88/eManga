@@ -56,7 +56,7 @@ enum ReadingDirection: String, CaseIterable, Identifiable {
 }
 
 @Observable
-final class ConversionSettings {
+final class ConversionSettings: Sendable {
     var outputFormat: OutputFormat   = .cbz
     var resolution: Resolution       = .balanced
     var customWidth: Int             = 1200

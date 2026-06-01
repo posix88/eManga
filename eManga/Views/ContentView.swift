@@ -40,7 +40,10 @@ struct ContentView: View {
             }
         }
         ToolbarItem(placement: .primaryAction) {
-            Button { viewModel.startConversion() } label: {
+            Button {
+                inspectorPresented = false
+                viewModel.startConversion()
+            } label: {
                 Label(
                     viewModel.isConverting ? String(localized: "Converting…") : String(localized: "Convert"),
                     systemImage: "arrow.triangle.2.circlepath"
@@ -54,6 +57,7 @@ struct ContentView: View {
             Button("Settings", systemImage: "sidebar.right") {
                 inspectorPresented.toggle()
             }
+            .disabled(viewModel.isConverting)
         }
     }
 
