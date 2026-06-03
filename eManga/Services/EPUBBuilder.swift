@@ -41,9 +41,11 @@ struct EPUBBuilder {
                                 atomically: true, encoding: .utf8)
 
         // Build pages
-        var manifestItems = ""
-        var spineItems    = ""
-
+        var manifestLines: [String] = []
+        var spineLines: [String] = []
+        manifestLines.reserveCapacity(images.count)
+        spineLines.reserveCapacity(images.count)
+        
         for (i, imgURL) in images.enumerated() {
             let pageNum = i + 1
             let imgName = String(format: "page_%04d.jpg", pageNum)
@@ -54,9 +56,9 @@ struct EPUBBuilder {
             Logger.epubBuilder.debug("Page \(pageNum, privacy: .public): \(w, privacy: .public)×\(h, privacy: .public)px")
             let coverAttr = pageNum == 1 ? " properties=\"cover-image\"" : ""
 
-            manifestItems += "    <item id=\"img_\(pageNum)\" href=\"images/\(imgName)\" media-type=\"image/jpeg\"\(coverAttr)/>\n"
-            manifestItems += "    <item id=\"page_\(pageNum)\" href=\"xhtml/page_\(pageNum).xhtml\" media-type=\"application/xhtml+xml\"/>\n"
-            spineItems    += "    <itemref idref=\"page_\(pageNum)\"/>\n"
+            manifestLines.append("    <item id=\"img_\(pageNum)\" href=\"images/\(imgName)\" media-type=\"image/jpeg\"\(coverAttr)/>\n")
+            manifestLines.append("    <item id=\"page_\(pageNum)\" href=\"xhtml/page_\(pageNum).xhtml\" media-type=\"application/xhtml+xml\"/>\n")
+            spineLines.append("    <itemref idref=\"page_\(pageNum)\"/>\n")
 
             try pageXHTML(pageNum: pageNum, imgName: imgName, width: w, height: h)
                 .write(to: xhtmlDir.appendingPathComponent("page_\(pageNum).xhtml"),
@@ -65,6 +67,10 @@ struct EPUBBuilder {
             await Task.yield()
         }
 
+        let manifestItems = manifestLines.joined(separator: "\n")
+        let spineItems = spineLines.joined(separator: "\n")
+        
+        
         // nav.xhtml & content.opf
         try navXHTML.write(to: oebps.appendingPathComponent("nav.xhtml"),
                            atomically: true, encoding: .utf8)

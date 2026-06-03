@@ -2,6 +2,8 @@ import SwiftUI
 import UniformTypeIdentifiers
 
 struct DropZoneView: View {
+    @Bindable var viewModel: ConversionViewModel
+    
     let onDrop: ([URL]) -> Void
     @State private var isTargeted = false
     @State private var isImporting = false
@@ -12,8 +14,11 @@ struct DropZoneView: View {
         dropShape
             .scaleEffect(dropPulse ? 1.04 : 1.0)
             .contentShape(Rectangle())
-            .onTapGesture { isImporting = true }
-            .dropDestination(for: URL.self, isEnabled: true) { (urls: [URL], _: DropSession) in
+            .onTapGesture {
+                guard !viewModel.isConverting else { return }
+                isImporting = true
+            }
+            .dropDestination(for: URL.self, isEnabled: !viewModel.isConverting) { (urls: [URL], _: DropSession) in
                 let pdfs = urls.filter { $0.pathExtension.lowercased() == "pdf" }
                 guard !pdfs.isEmpty else { return }
                 onDrop(pdfs)
@@ -60,7 +65,7 @@ struct DropZoneView: View {
 
 #if DEBUG
 #Preview {
-    DropZoneView { _ in }
+    DropZoneView(viewModel: .mock()) { _ in }
         .frame(width: 420, height: 80)
         .padding()
 }

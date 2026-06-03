@@ -73,9 +73,11 @@ struct ContentView: View {
     }
 
     private var dropZone: some View {
-        DropZoneView { urls in viewModel.addPDFs(urls) }
-            .frame(maxHeight: viewModel.jobs.isEmpty ? .infinity : 72)
-            .padding(8)
+        DropZoneView(viewModel: viewModel) { urls in
+            viewModel.addPDFs(urls)
+        }
+        .frame(maxHeight: viewModel.jobs.isEmpty ? .infinity : 72)
+        .padding(8)
     }
 }
 
