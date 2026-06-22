@@ -55,6 +55,23 @@
         }
       }
     },
+    "Both" : {
+      "comment" : "Output format option that builds both CBZ and EPUB",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Both"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entrambi"
+          }
+        }
+      }
+    },
     "Building %@…" : {
       "comment" : "Progress message while packaging output file; %@ is the output filename",
       "localizations" : {
@@ -68,6 +85,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Costruzione %1$@…"
+          }
+        }
+      }
+    },
+    "CBZ" : {
+      "comment" : "Output format option for CBZ archives",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CBZ"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CBZ"
           }
         }
       }
@@ -102,6 +136,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossibile aprire il file PDF."
+          }
+        }
+      }
+    },
+    "Chinese (Simplified)" : {
+      "comment" : "EPUB language option",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chinese (Simplified)"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cinese (semplificato)"
+          }
+        }
+      }
+    },
+    "Chinese (Traditional)" : {
+      "comment" : "EPUB language option",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chinese (Traditional)"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cinese (tradizionale)"
           }
         }
       }
@@ -154,6 +222,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rimuovi Completati"
+          }
+        }
+      }
+    },
+    "Color JPEG" : {
+      "comment" : "Image encoding option that keeps RGB color",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Color JPEG"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JPEG a colori"
           }
         }
       }
@@ -330,6 +415,40 @@
         }
       }
     },
+    "English" : {
+      "comment" : "EPUB language option",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "English"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inglese"
+          }
+        }
+      }
+    },
+    "EPUB" : {
+      "comment" : "Output format option for EPUB files",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "EPUB"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "EPUB"
+          }
+        }
+      }
+    },
     "Failed to render a page." : {
       "comment" : "Error shown when a PDF page cannot be rasterised",
       "localizations" : {
@@ -364,6 +483,40 @@
         }
       }
     },
+    "Fast" : {
+      "comment" : "Size limit mode that favors conversion speed and uses byte estimates",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fast"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Veloce"
+          }
+        }
+      }
+    },
+    "Fast estimates the final size and keeps conversion quick. The output may be slightly above or below the limit." : {
+      "comment" : "Help text explaining the fast size-limit mode",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fast estimates the final size and keeps conversion quick. The output may be slightly above or below the limit."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Veloce stima la dimensione finale e mantiene rapida la conversione. L'output potrebbe essere leggermente sopra o sotto il limite."
+          }
+        }
+      }
+    },
     "Format" : {
       "comment" : "Label for the output-format picker in Settings",
       "localizations" : {
@@ -381,6 +534,57 @@
         }
       }
     },
+    "French" : {
+      "comment" : "EPUB language option",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "French"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Francese"
+          }
+        }
+      }
+    },
+    "German" : {
+      "comment" : "EPUB language option",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "German"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tedesco"
+          }
+        }
+      }
+    },
+    "Grayscale JPEG" : {
+      "comment" : "Image encoding option that converts pages to monochrome JPEG",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Grayscale JPEG"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JPEG in scala di grigi"
+          }
+        }
+      }
+    },
     "High (1300px)" : {
       "comment" : "Resolution preset label",
       "localizations" : {
@@ -394,6 +598,91 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Alta qualità (1300px)"
+          }
+        }
+      }
+    },
+    "Images" : {
+      "comment" : "Picker label for image encoding mode in Settings",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Images"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Immagini"
+          }
+        }
+      }
+    },
+    "Italian" : {
+      "comment" : "EPUB language option",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Italian"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Italiano"
+          }
+        }
+      }
+    },
+    "Japanese" : {
+      "comment" : "EPUB language option",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Japanese"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Giapponese"
+          }
+        }
+      }
+    },
+    "Korean" : {
+      "comment" : "EPUB language option",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Korean"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Coreano"
+          }
+        }
+      }
+    },
+    "Language" : {
+      "comment" : "Picker label for EPUB language metadata",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Language"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lingua"
           }
         }
       }
@@ -468,7 +757,21 @@
       }
     },
     "Limit output size" : {
-
+      "comment" : "Toggle label in Settings that enables output size optimization",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Limit output size"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Limita dimensione output"
+          }
+        }
+      }
     },
     "Max size (MB)" : {
       "comment" : "Label for the max file size field in Settings",
@@ -517,6 +820,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Metadati"
+          }
+        }
+      }
+    },
+    "Mode" : {
+      "comment" : "Picker label for size limit mode",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mode"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modalità"
           }
         }
       }
@@ -608,6 +928,23 @@
         }
       }
     },
+    "Optimizing images to meet size limit…" : {
+      "comment" : "Progress message while reducing rendered images to fit the configured output size",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Optimizing images to meet size limit…"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ottimizzazione immagini per rispettare il limite…"
+          }
+        }
+      }
+    },
     "PDF contains no pages." : {
       "comment" : "Error shown when the PDF has a page count of zero",
       "localizations" : {
@@ -639,6 +976,57 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "File PDF"
+          }
+        }
+      }
+    },
+    "Precise" : {
+      "comment" : "Size limit mode that may do extra passes to measure packaged output more accurately",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Precise"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Precisa"
+          }
+        }
+      }
+    },
+    "Precise measures temporary packages and may take extra passes to get closer to the limit." : {
+      "comment" : "Help text explaining the precise size-limit mode",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Precise measures temporary packages and may take extra passes to get closer to the limit."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Precisa misura pacchetti temporanei e può richiedere passaggi extra per avvicinarsi al limite."
+          }
+        }
+      }
+    },
+    "Portuguese" : {
+      "comment" : "EPUB language option",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Portuguese"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Portoghese"
           }
         }
       }
@@ -678,7 +1066,22 @@
       }
     },
     "Recompressing images to meet size limit…" : {
-
+      "comment" : "Stale progress message retained for older extracted strings",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recompressing images to meet size limit…"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ricompressione immagini per rispettare il limite…"
+          }
+        }
+      }
     },
     "Rendering page %lld / %lld…" : {
       "comment" : "Progress message during page rendering; first %lld is the current page, second is the total",
@@ -767,10 +1170,38 @@
       }
     },
     "Settings" : {
-
+      "comment" : "Toolbar button that toggles the settings inspector",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impostazioni"
+          }
+        }
+      }
     },
     "Size Limit" : {
-
+      "comment" : "Settings section header for output size limit controls",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Size Limit"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Limite dimensione"
+          }
+        }
+      }
     },
     "Split" : {
       "comment" : "Settings section header for file-splitting options",
@@ -786,6 +1217,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Suddivisione"
+          }
+        }
+      }
+    },
+    "Spanish" : {
+      "comment" : "EPUB language option",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spanish"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spagnolo"
           }
         }
       }

@@ -133,9 +133,12 @@ final class ConversionViewModel {
     }
 
     private func convertJob(_ job: ConversionJob, outputURL: URL) async {
-        // Activate sandbox access for the user-selected folder for the duration of this conversion
-        let accessed = outputURL.startAccessingSecurityScopedResource()
-        defer { if accessed { outputURL.stopAccessingSecurityScopedResource() } }
+        let outputAccessed = outputURL.startAccessingSecurityScopedResource()
+        let inputAccessed = job.pdfURL.startAccessingSecurityScopedResource()
+        defer {
+            if inputAccessed { job.pdfURL.stopAccessingSecurityScopedResource() }
+            if outputAccessed { outputURL.stopAccessingSecurityScopedResource() }
+        }
 
         guard let startIdx = jobs.firstIndex(where: { $0.id == job.id }) else { return }
         jobs[startIdx].status = .processing(progress: 0, message: String(localized: "Starting…"))

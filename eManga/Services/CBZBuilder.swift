@@ -18,9 +18,14 @@ struct CBZBuilder {
 
         let archive = try Archive(url: destination, accessMode: .create, pathEncoding: nil)
         for (idx, imageURL) in images.enumerated() {
-            let entryName = String(format: "page-%04d.jpg", idx + 1)
-            // Store JPEGs without re-compression — they are already compressed and deflate yields no benefit
-            try archive.addEntry(with: entryName, fileURL: imageURL, compressionMethod: .none)
+            let fileExtension = normalizedImageExtension(for: imageURL)
+            let entryName = String(format: "page-%04d.%@", idx + 1, fileExtension)
+            if shouldStoreWithoutDeflate(fileExtension: fileExtension) {
+                // Already-compressed image formats do not benefit from ZIP deflate.
+                try archive.addEntry(with: entryName, fileURL: imageURL, compressionMethod: .none)
+            } else {
+                try archive.addEntry(with: entryName, fileURL: imageURL)
+            }
             await Task.yield()
         }
 
@@ -29,6 +34,20 @@ struct CBZBuilder {
         Logger.cbzBuilder.notice(
             "CBZ built in \(elapsed.formatted(.units(allowed: [.seconds, .milliseconds])), privacy: .public) — \(sizeKB, privacy: .public) KB"
         )
+    }
+
+    private nonisolated static func normalizedImageExtension(for url: URL) -> String {
+        let ext = url.pathExtension.lowercased()
+        return ext.isEmpty ? "jpg" : ext
+    }
+
+    private nonisolated static func shouldStoreWithoutDeflate(fileExtension: String) -> Bool {
+        switch fileExtension.lowercased() {
+        case "jpg", "jpeg", "png", "webp", "heic", "heif", "avif":
+            return true
+        default:
+            return false
+        }
     }
 }
 

@@ -44,6 +44,11 @@
 			path = eMangaTests;
 			sourceTree = "<group>";
 		};
+		4C94DCE12FCB000000208003 /* eMangaUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = eMangaUITests;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +82,7 @@
 			children = (
 				4C94DC982FC9A33300208003 /* eManga */,
 				4C94DCA62FC9A33500208003 /* eMangaTests */,
+				4C94DCE12FCB000000208003 /* eMangaUITests */,
 				4C94DC972FC9A33300208003 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -152,6 +158,9 @@
 			);
 			dependencies = (
 				4C94DCAF2FC9A33500208003 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				4C94DCE12FCB000000208003 /* eMangaUITests */,
 			);
 			name = eMangaUITests;
 			packageProductDependencies = (
@@ -472,7 +481,7 @@
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/eManga.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/eManga";
 			};
 			name = Debug;
@@ -493,7 +502,7 @@
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/eManga.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/eManga";
 			};
 			name = Release;
@@ -512,7 +521,7 @@
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TEST_TARGET_NAME = eManga;
 			};
 			name = Debug;
@@ -531,7 +540,7 @@
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TEST_TARGET_NAME = eManga;
 			};
 			name = Release;

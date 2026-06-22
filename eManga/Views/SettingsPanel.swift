@@ -43,7 +43,7 @@ struct SettingsPanel: View {
             Section("Output") {
                 Picker("Format", selection: $settings.outputFormat) {
                     ForEach(OutputFormat.allCases) { fmt in
-                        Text(fmt.rawValue).tag(fmt)
+                        Text(fmt.label).tag(fmt)
                     }
                 }
                 .pickerStyle(.segmented)
@@ -53,6 +53,11 @@ struct SettingsPanel: View {
                 Picker("Resolution", selection: $settings.resolution) {
                     ForEach(Resolution.allCases) { res in
                         Text(res.label).tag(res)
+                    }
+                }
+                Picker("Images", selection: $settings.imageEncoding) {
+                    ForEach(ImageEncoding.allCases) { encoding in
+                        Text(encoding.label).tag(encoding)
                     }
                 }
                 if settings.resolution == .custom {
@@ -74,6 +79,11 @@ struct SettingsPanel: View {
                     TextField("", text: $settings.author)
                         .multilineTextAlignment(.trailing)
                 }
+                Picker("Language", selection: $settings.language) {
+                    ForEach(PublicationLanguage.allCases) { language in
+                        Text(language.label).tag(language)
+                    }
+                }
             }
 
             Section("Size Limit") {
@@ -82,6 +92,15 @@ struct SettingsPanel: View {
                     set: { settings.maxFileSizeMB = $0 ? 49 : 0 }
                 ))
                 if settings.maxFileSizeMB > 0 {
+                    Picker("Mode", selection: $settings.sizeLimitMode) {
+                        ForEach(SizeLimitMode.allCases) { mode in
+                            Text(mode.label).tag(mode)
+                        }
+                    }
+                    Text(settings.sizeLimitMode.explanation)
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
                     LabeledContent("Max size (MB)") {
                         TextField("MB", value: $settings.maxFileSizeMB, format: .number)
                             .multilineTextAlignment(.trailing)

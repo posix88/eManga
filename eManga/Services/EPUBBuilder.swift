@@ -10,6 +10,7 @@ struct EPUBBuilder {
         images:    [URL],
         title:     String,
         author:    String,
+        language:  String,
         direction: ReadingDirection,
         to destination: URL
     ) async throws {
@@ -48,7 +49,8 @@ struct EPUBBuilder {
         
         for (i, imgURL) in images.enumerated() {
             let pageNum = i + 1
-            let imgName = String(format: "page_%04d.jpg", pageNum)
+            let fileExtension = normalizedImageExtension(for: imgURL)
+            let imgName = String(format: "page_%04d.%@", pageNum, fileExtension)
             let destImg = imgDir.appendingPathComponent(imgName)
             try fm.copyItem(at: imgURL, to: destImg)
 
@@ -56,7 +58,7 @@ struct EPUBBuilder {
             Logger.epubBuilder.debug("Page \(pageNum, privacy: .public): \(w, privacy: .public)×\(h, privacy: .public)px")
             let coverAttr = pageNum == 1 ? " properties=\"cover-image\"" : ""
 
-            manifestLines.append("    <item id=\"img_\(pageNum)\" href=\"images/\(imgName)\" media-type=\"image/jpeg\"\(coverAttr)/>\n")
+            manifestLines.append("    <item id=\"img_\(pageNum)\" href=\"images/\(imgName)\" media-type=\"\(mediaType(for: fileExtension))\"\(coverAttr)/>\n")
             manifestLines.append("    <item id=\"page_\(pageNum)\" href=\"xhtml/page_\(pageNum).xhtml\" media-type=\"application/xhtml+xml\"/>\n")
             spineLines.append("    <itemref idref=\"page_\(pageNum)\"/>\n")
 
@@ -75,6 +77,7 @@ struct EPUBBuilder {
         try navXHTML.write(to: oebps.appendingPathComponent("nav.xhtml"),
                            atomically: true, encoding: .utf8)
         try contentOPF(title: title, author: author,
+                       language: language,
                        direction: direction.rawValue,
                        manifest: manifestItems, spine: spineItems)
             .write(to: oebps.appendingPathComponent("content.opf"),
@@ -101,7 +104,10 @@ struct EPUBBuilder {
         of dir: URL, into archive: Archive, relativeTo base: URL, excluding: String?
     ) async throws {
         let items = try FileManager.default.contentsOfDirectory(
-            at: dir, includingPropertiesForKeys: [.isDirectoryKey])
+            at: dir, includingPropertiesForKeys: [.isDirectoryKey]
+        )
+        .sorted { $0.path(percentEncoded: false) < $1.path(percentEncoded: false) }
+
         for item in items {
             if let ex = excluding, item.lastPathComponent == ex { continue }
             let isDir = (try? item.resourceValues(forKeys: [.isDirectoryKey]).isDirectory) ?? false
@@ -109,7 +115,11 @@ struct EPUBBuilder {
                 try await addDirectoryContents(of: item, into: archive, relativeTo: base, excluding: nil)
             } else {
                 let rel = String(item.path.dropFirst(base.path.count + 1))
-                try archive.addEntry(with: rel, fileURL: item)
+                if shouldStoreWithoutDeflate(path: rel) {
+                    try archive.addEntry(with: rel, fileURL: item, compressionMethod: .none)
+                } else {
+                    try archive.addEntry(with: rel, fileURL: item)
+                }
             }
             
             await Task.yield()
@@ -124,6 +134,40 @@ struct EPUBBuilder {
             let h     = props[kCGImagePropertyPixelHeight] as? Int
         else { return (1000, 1414) }
         return (w, h)
+    }
+
+    private nonisolated static func normalizedImageExtension(for url: URL) -> String {
+        let ext = url.pathExtension.lowercased()
+        return ext.isEmpty ? "jpg" : ext
+    }
+
+    private nonisolated static func mediaType(for fileExtension: String) -> String {
+        switch fileExtension.lowercased() {
+        case "jpg", "jpeg":
+            return "image/jpeg"
+        case "png":
+            return "image/png"
+        case "webp":
+            return "image/webp"
+        case "heic":
+            return "image/heic"
+        case "heif":
+            return "image/heif"
+        case "avif":
+            return "image/avif"
+        default:
+            return "application/octet-stream"
+        }
+    }
+
+    private nonisolated static func shouldStoreWithoutDeflate(path: String) -> Bool {
+        let ext = URL(fileURLWithPath: path).pathExtension.lowercased()
+        switch ext {
+        case "jpg", "jpeg", "png", "webp", "heic", "heif", "avif":
+            return true
+        default:
+            return false
+        }
     }
 
     private nonisolated static func xmlEscape(_ s: String) -> String {
@@ -177,19 +221,32 @@ struct EPUBBuilder {
 
     private nonisolated static func contentOPF(
         title: String, author: String,
+        language: String,
         direction: String, manifest: String, spine: String
     ) -> String {
         let uuid = "emanga-\(UUID().uuidString)"
-        let date = Date.now.formatted(.iso8601)
+        let isoFormat = Date.ISO8601FormatStyle(
+            dateSeparator: .dash,
+            dateTimeSeparator: .standard,
+            timeSeparator: .colon,
+            timeZoneSeparator: .colon,
+            includingFractionalSeconds: true,
+            timeZone: .gmt
+        )
+        let date = isoFormat.format(.now)
+        let normalizedLanguage = language.trimmingCharacters(in: .whitespacesAndNewlines)
         return """
         <?xml version="1.0" encoding="UTF-8"?>
         <package xmlns="http://www.idpf.org/2007/opf" unique-identifier="pub-id" version="3.0"
-                 prefix="rendition: http://www.idpf.org/vocab/rendition/#">
+                 prefix="rendition: http://www.idpf.org/vocab/rendition/# schema: http://schema.org/">
           <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
             <dc:identifier id="pub-id">urn:uuid:\(uuid)</dc:identifier>
             <dc:title>\(xmlEscape(title))</dc:title>
             <dc:creator>\(xmlEscape(author))</dc:creator>
-            <dc:language>ja</dc:language>
+            <dc:language>\(xmlEscape(normalizedLanguage.isEmpty ? "und" : normalizedLanguage))</dc:language>
+            <dc:type>comic</dc:type>
+            <dc:subject>Comics &amp; Graphic Novels</dc:subject>
+            <meta property="schema:genre">Comics &amp; Graphic Novels</meta>
             <meta property="dcterms:modified">\(date)</meta>
             <meta property="rendition:layout">pre-paginated</meta>
             <meta property="rendition:spread">none</meta>
